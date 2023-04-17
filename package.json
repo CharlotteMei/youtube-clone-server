@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "final-project-server",
+  "version": "1.0.0",
+  "description": "server side for 5610 final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Charlotte Mei",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  }
+}
