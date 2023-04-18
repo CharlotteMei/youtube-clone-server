@@ -3,7 +3,9 @@ const usersSchema = new mongoose.Schema(
  {
    username: { type: String, unique: true, required: true },
    password: { type: String, required: true },
-   firstName: String, lastName: String, dob: Date,
+   firstName: String, 
+   lastName: String, 
+   dob: Date,
    email: String,
    createdAt: { type: Date, default: Date.now },
    isAdmin: { type: Boolean, default: false },
@@ -16,4 +18,3 @@ const usersSchema = new mongoose.Schema(
  { collection: "users" }
 );
 export default usersSchema;
-
