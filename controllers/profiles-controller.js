@@ -1,7 +1,7 @@
 import * as profilesDao from "../daos/profiles-dao.js"
 
 const ProfilesController = (app) => {
-    app.post('/api/create-profile', createProfile);
+    app.post('/api/profiles', createProfile);
     app.get('/api/profiles', findProfiles);
     app.get('/api/profiles/:pid', findOneProfileByID)
     app.put('/api/profiles/:pid', updateProfile);
