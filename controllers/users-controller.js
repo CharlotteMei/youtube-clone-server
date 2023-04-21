@@ -1,5 +1,6 @@
 import * as dao from "./users-dao.js";
 import { findByCredentials, findByUsername } from "./users-dao.js";
+import userModel from "../models/userProfile.js";
 
 let currentUser = null;
 
@@ -23,6 +24,18 @@ const UsersController = (app) => {
     console.log("status: ", status);
     res.json(status);
   };
+
+  const updateCounty = async (req, res, next) => {
+    try {
+      const username = req.params.username;
+      const country = req.body.country;
+      const existingUser = await findByUsername(username);
+      const status = await dao.updateUser(username, {...existingUser._doc, country: country});
+      return res.json(status);
+    } catch (ex) {
+      next(ex);
+    }
+  }
 
   const loadUserByUsername = async (req, res) => {
     const username = req.query.username;
@@ -70,6 +83,7 @@ const UsersController = (app) => {
   app.post("/register", register);
   app.post("/login", login);
   app.get("/api/users/:username", getByUsername);
+  app.post("/api/users/:username", updateCounty);
 };
 
 export default UsersController;

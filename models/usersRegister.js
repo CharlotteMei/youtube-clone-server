@@ -3,7 +3,9 @@ const userSchema = mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    userType: { type: String, default: "USER", enum: ["ADMIN", "USER", "BLOGGER"] },
+    country: { type: String, required: true },
+    gender: { type: String, enum: ["Female", "Male", "Other"] },
+    userType: { type: String, enum: ["STUDENT", "PRO", "ADMIN"] },
   },
   { collection: "users" }
 );
