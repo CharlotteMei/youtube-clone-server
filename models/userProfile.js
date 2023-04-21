@@ -13,9 +13,9 @@ const userProfileSchema = new mongoose.Schema(
         banner: {type: String, default: "/images/profile-banner.jpeg"},
         likes: [
                 {
-                         exerciseId: String,
-                         bodyPart: String,
-                         name: String }],
+                         videoId: String,
+                         videoTitle: String,
+                        channelTitle: String }],
     },
     { collection: "userProfile" }
 );
