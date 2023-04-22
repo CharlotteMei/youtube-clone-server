@@ -6,13 +6,14 @@ const userProfileSchema = new mongoose.Schema(
         age: { type: String, default: "30" },
         interest: { type: String, default: "Music" },
         hometown: { type: String, default: "Irvine" },
-        avatar: {type: String, default: "/images/avatar/profile.png"},
-        banner: {type: String, default: "/images/profile-banner.jpeg"},
+        avatar: { type: String, default: "/images/avatar/profile.png" },
+        banner: { type: String, default: "/images/profile-banner.jpeg" },
         likes: [
-                {
-                         videoId: String,
-                         videoTitle: String,
-                        channelTitle: String }],
+            {
+                videoId: String,
+                videoTitle: String,
+                channelTitle: String
+            }]
     },
     { collection: "userProfile" }
 );

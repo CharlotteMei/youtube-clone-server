@@ -8,6 +8,7 @@ import { router as planProgressRouter } from "./routes/planProgress.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import UsersController from "./controllers/users-controller.js";
+import VideosController from "./controllers/video-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -41,6 +42,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 UsersController(app);
+VideosController(app);
 app.listen(process.env.PORT || 4000, () => {
     connect();
     console.log("Connected to backend!");
