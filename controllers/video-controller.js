@@ -22,12 +22,12 @@ const VideosController = (app) => {
             const videoID = req.params.videoID;
             console.log("update comment to video")
             console.log("video id: ", videoID)
-            console.log("req: ", req)
 
             const newData = {$set: req.body}
             console.log("new data: ", newData)
 
             let  videoIfExist = await dao.findByVideoID(videoID);
+
             if (!videoIfExist) {
                 console.log("video not exist. creating video...")
                 // this video id does not exist in the db collection yet
@@ -37,7 +37,7 @@ const VideosController = (app) => {
 
             // update the comments field
             console.log("video to update: ", videoIfExist)
-            const videoData = await dao.updateVideo(videoID, newData)
+            const videoData = await dao.updateVideo(videoIfExist, newData)
             console.log(videoData);
             return res.json(videoData);
         }

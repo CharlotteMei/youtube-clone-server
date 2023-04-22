@@ -6,11 +6,13 @@ export const createVideo = (videoID) => {
 };
 
 export const findByVideoID = (videoID) => {
-    console.log("dao: in find by video id")
+    console.log("dao: in find by video id - ", videoID)
     return videoModel.findOne({ videoID: videoID });
 }
 
-export const updateVideo = (videoID, newData) => {
-    return videoModel.updateOne({ videoID: videoID }, newData);
+export const updateVideo = (video, newData) => {
+    console.log("dao: udpate video")
+    console.log("video", video)
+    return videoModel.findOneAndUpdate(video._id, newData);
 }
     
