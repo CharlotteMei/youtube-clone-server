@@ -1,5 +1,4 @@
 import * as dao from "./users-dao.js";
-// import { findByCredentials, findByUsername, findAllUsers } from "./users-dao.js";
 
 let currentUser = null;
 
