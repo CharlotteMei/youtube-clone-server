@@ -9,11 +9,16 @@ const userProfileSchema = new mongoose.Schema(
         avatar: { type: String, default: "/images/avatar/profile.png" },
         banner: { type: String, default: "/images/profile-banner.jpeg" },
         likes: [
+
+                {
+                         videoId: String,
+                         videoTitle: String,
+                        channelTitle: String }],
+        follows: [
             {
-                videoId: String,
-                videoTitle: String,
-                channelTitle: String
-            }]
+                username: String,
+                country: String
+            }],
     },
     { collection: "userProfile" }
 );

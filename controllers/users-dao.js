@@ -16,6 +16,9 @@ export const createUser = (user) => {
 export const findByUsername = (username) =>
   userRegisterModel.findOne({ username });
 
+export const findAllUsers = () =>
+  userRegisterModel.find();
+
 export const findByCredentials = (credential, res) => {
   userRegisterModel.findOne({ username: credential.username }).then((user) => {
     if (!user) {

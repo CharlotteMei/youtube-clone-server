@@ -1,5 +1,4 @@
 import * as dao from "./users-dao.js";
-import { findByCredentials, findByUsername } from "./users-dao.js";
 
 let currentUser = null;
 
@@ -9,6 +8,8 @@ const UsersController = (app) => {
     const actualUser = await dao.createUser(user);
     res.json(actualUser);
   };
+
+  
 
   const deleteUser = async (req, res) => {
     const uid = req.params.uid;
@@ -28,8 +29,8 @@ const UsersController = (app) => {
     try {
       const username = req.params.username;
       const country = req.body.country;
-      const existingUser = await findByUsername(username);
-      const status = await dao.updateUser(username, {...existingUser._doc, country: country});
+      const existingUser = await dao.findByUsername(username);
+      const status = await dao.updateUser(username, { ...existingUser._doc, country: country });
       return res.json(status);
     } catch (ex) {
       next(ex);
@@ -38,7 +39,7 @@ const UsersController = (app) => {
 
   const loadUserByUsername = async (req, res) => {
     const username = req.query.username;
-    const existingUser = await findByUsername(username);
+    const existingUser = await dao.findByUsername(username);
     if (!existingUser) {
       res.sendStatus(403);
       return;
@@ -48,7 +49,7 @@ const UsersController = (app) => {
 
   const register = async (req, res) => {
     const user = req.body;
-    const existingUser = await findByUsername(user.username);
+    const existingUser = await dao.findByUsername(user.username);
     if (existingUser) {
       res.sendStatus(403);
       return;
@@ -61,20 +62,32 @@ const UsersController = (app) => {
   const login = async (req, res) => {
     const credentials = req.body;
     console.log("login credential", credentials);
-    await findByCredentials(credentials, res);
+    await dao.findByCredentials(credentials, res);
     // console.log("error: ", error);
     return;
   };
 
   const getByUsername = async (req, res, next) => {
     try {
+      console.log("get by user name");
       const username = req.params.username;
-      const existingUser = await findByUsername(username);
+      const existingUser = await dao.findByUsername(username);
       return res.json(existingUser);
     } catch (ex) {
       next(ex);
     }
   }
+
+  const getAllUsers = async (req, res) => {
+  try {
+    const allUsers = await dao.findAllUsers();
+    console.log(allUsers);
+    return res.json(allUsers);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 
   app.post("/users", createUser);
   app.get("/oneuser", loadUserByUsername);
@@ -83,6 +96,7 @@ const UsersController = (app) => {
   app.post("/login", login);
   app.get("/api/users/:username", getByUsername);
   app.post("/api/users/:username", updateCounty);
+  app.get("/api/users", getAllUsers);
 };
 
 export default UsersController;
