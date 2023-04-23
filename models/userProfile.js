@@ -13,6 +13,11 @@ const userProfileSchema = new mongoose.Schema(
                          videoId: String,
                          videoTitle: String,
                         channelTitle: String }],
+        follows: [
+            {
+                username: String,
+                country: String
+            }],
     },
     { collection: "userProfile" }
 );
