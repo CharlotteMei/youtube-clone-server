@@ -30,8 +30,41 @@ const VideoCommentsController = (app) => {
         }
     }
 
+    const updateVideoComment = async(req, res, next) => {
+        try {
+            console.log("in controller - update comment")
+            const cid = req.params.cid;
+            const updatedVideoComment = req.body;
+            console.log("cid: ", cid, " updated video comment as: ", updatedVideoComment)
+
+            const ret = await dao.updateComment(cid, updatedVideoComment)
+            console.log(ret);
+            return res.json(ret);
+
+        } catch (ex) {
+            next(ex);
+        }
+    }
+
+    const deleteVideoComment = async(req, res, next) => {
+        try {
+            console.log("in controller - delete comment")
+            const cid = req.params.cid;
+
+            const ret = await dao.deleteComment(cid)
+            console.log(ret);
+            return res.json(ret);
+
+        } catch (ex) {
+            next(ex);
+        }
+    }
+
     app.get("/api/videos/:videoID/getcomments", getCommentsByVideoID);
     app.post("/api/videos/:videoID/addcomment", addVideoComment);
+    app.put("/api/videos/updatecomment/:cid", updateVideoComment);
+    app.delete("/api/videos/deletecomment/:cid", deleteVideoComment);
+    
 
 };
 
